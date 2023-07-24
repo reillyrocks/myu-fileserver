@@ -1,0 +1,4 @@
+.idea
+.dockerignore
+.htpasswd
+*__pycache__*

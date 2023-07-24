@@ -1,0 +1,62 @@
+version: '3.9'
+
+services:
+
+  proxy:
+    image: myu/proxy:latest
+    container_name: myu_proxy
+    # I think I may need the below for when the certbot restart s nginx
+#    restart: always
+    build:
+      target: proxy
+    ports:
+      - "80:80"
+#      - "443:443"
+    volumes:
+      - .htpasswd:/etc/nginx/.htpasswd:ro
+      - ./proxy/nginx.conf:/etc/nginx/nginx.conf:ro
+#      - ./certbot/www:/var/www/certbot/:ro
+#      - ./certbot/conf/:/etc/nginx/ssl/:ro
+    networks:
+      - frontend
+# manual process.... will one day do it but not today
+#  certbot:
+#    image: certbot/certbot:latest
+#    command: certbot certonly -d reillykeating.com --manual --preferred-challenges dns --dry-run --register-unsafely-without-email
+#    volumes:
+#      - ./certbot/www/:/var/www/certbot/:rw
+#      - ./certbot/conf/:/etc/letsencrypt/:rw
+
+
+  fastapi:
+    image: myu/fastapi:latest
+    container_name: myu_fastapi
+    build:
+      target: fastapi
+    # I run the uvicorn fastapi app with --reload... in order for that to work,
+    # I mount the app so uvicorn can see the updates to code and restart the app.
+    # This way the app updates with my changes, and I do not need to launch docker :)
+    volumes:
+      - ./app:/usr/src/api/app
+    networks:
+      - frontend
+      - backend
+
+#  db:
+#    image: myu/db:latest
+#    container_name: myu_db
+#    build:
+#      target: db
+#    networks:
+#      - backend
+
+# Create a network! Frontend network member "proxy" can get an api request from "fastapi" by pinging
+# urls "http://myu_fastapi:8000" or "http://fastapi:8000" (The service name, or container_name. I will be using the container_name)
+networks:
+  frontend:
+    name: frontend_network
+    driver: bridge
+  backend:
+    name: backend_network
+    driver: bridge
+# bridge is a default network, I will be using it.
