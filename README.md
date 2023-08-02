@@ -2,7 +2,18 @@
 TODOS:
 - Add JWT token for security
 - SSL 443 stuff will be added.. its challenging. 
+- add more endpoints (add text)
+- add db?
 
+### What I have learned (also a reminder to me not to repeat mistakes)
+- CORS was not the issue... soo  I do not want to expose my fastapi app to the world!!
+I want to keep it in the Docker network, only exposing a front end (an area i am unfamiliar with). So
+I built a front end that was html and js to do a fetch request to my api.... I thought it was a CORS issue,
+when it was not working. It is simple: **the user is *NOT* part of the docker network**. I had to hammer this 
+into my head a few times. 
+The users **browser loads**, and runs the html/javascript... not the front end apache landing page :facepalm:
+- The front end will need to be a full app, not some javascript. It will need its own "backend" of sorts that
+will interact with the fastapi. I wonder if i could do a swagger page. 
 
 
 ### I like sustainability, and scalability.
@@ -31,5 +42,6 @@ I am not sure what I will use**, but something simple like `MongoDB` for what wi
 might be good enough. :shrug:
 
 # Running
-create creds files: .`api` `.db`
+create creds files: `.htpasswd`
+
 `htpasswd -c .htpasswd <username>`

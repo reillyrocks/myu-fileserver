@@ -1,6 +1,15 @@
 version: '3.9'
 
 services:
+#  frontend_app_of_somekind:
+#    image: myu/frontend_app_of_somekind:latest
+#    container_name: myu_frontend_app_of_somekind
+#    build:
+#      target: frontend_app_of_somekind
+#    volumes:
+#      - ./frontend/nginx.conf:/etc/nginx/nginx.conf:ro
+#    networks:
+#      - frontend
 
   proxy:
     image: myu/proxy:latest

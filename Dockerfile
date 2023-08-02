@@ -20,3 +20,7 @@ CMD [ "poetry", "run", "uvicorn", "app.main:app", "--host", "0.0.0.0", "--port",
 
 FROM --platform=linux/amd64 nginx:latest as proxy
 
+#FROM --platform=linux/amd64 nginx:alpine as htmlfront
+#
+#WORKDIR /usr/src/webapp
+#COPY frontend/landingpage.html /usr/share/nginx/html/index.html
