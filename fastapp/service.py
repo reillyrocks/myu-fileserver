@@ -9,6 +9,8 @@ files = {"file1": "/file1",
 
 texts = ["text1", "url2", "something"]
 
+# THis is the location that will likely need the interaction with the DB and filesystem.
+
 
 # Get
 def list_text():

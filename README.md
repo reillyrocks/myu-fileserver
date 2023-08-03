@@ -1,9 +1,7 @@
 # myu
 TODOS:
-- Add JWT token for security
-- SSL 443 stuff will be added.. its challenging. 
-- add more endpoints (add text)
-- add db?
+- Honestly security, and website networking... is challenging.
+worried this will be a pet project running at localhost.
 
 ### What I have learned (also a reminder to me not to repeat mistakes)
 - CORS was not the issue... soo  I do not want to expose my fastapi app to the world!!
@@ -45,3 +43,6 @@ might be good enough. :shrug:
 create creds files: `.htpasswd`
 
 `htpasswd -c .htpasswd <username>`
+
+`docker compose up`
+it will be running at localhost (use password from above)

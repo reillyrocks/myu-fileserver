@@ -46,7 +46,7 @@ services:
     # I mount the app so uvicorn can see the updates to code and restart the app.
     # This way the app updates with my changes, and I do not need to launch docker :)
     volumes:
-      - ./app:/usr/src/api/app
+      - ./fastapp:/usr/src/api/fastapp
     networks:
       - frontend
       - backend

@@ -1,8 +1,13 @@
 from fastapi import FastAPI
 from fastapi.responses import RedirectResponse
+from .config import settings
 
 from . import schema, service
-app = FastAPI()
+
+app = FastAPI(
+    title=settings.title,
+    description=settings.description,
+)
 
 
 @app.get("/")
