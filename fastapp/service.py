@@ -9,7 +9,7 @@ files = {"file1": "/file1",
 
 texts = ["text1", "url2", "something"]
 
-# THis is the location that will likely need the interaction with the DB and filesystem.
+# This is the location that will likely need the interaction with the DB and filesystem.
 
 
 # Get
@@ -34,5 +34,3 @@ def post_text(text: schema.Text):
 def post_file(file: schema.File):
     print(dir(file))
     return True
-
-# key: value

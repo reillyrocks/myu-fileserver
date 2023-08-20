@@ -1,7 +1,9 @@
 # myu
 TODOS:
-- Honestly security, and website networking... is challenging.
-worried this will be a pet project running at localhost.
+- Look into traefik, at a glance I think I like it more than nginx.
+- Honestly security... is challenging. I want to go to the great wide web... 
+But I think this will be a pet project running in my local network. My appreciation for security engineers is now very high. 
+I will probably put it on my raspberry pi at some point.
 
 ### What I have learned (also a reminder to me not to repeat mistakes)
 - CORS was not the issue... soo  I do not want to expose my fastapi app to the world!!
@@ -18,8 +20,6 @@ will interact with the fastapi. I wonder if i could do a swagger page.
 **Sustainable** means readable, simple, maintainable to me
 **Scalability** means flexibility, modularity, and really enables microservices. 
 
-My Sustain and Scale -ability (SnS) senses are telling me, 3 containers for this fileserver backend 
-is the right approach. <sub> (I could be wrong, please tell me - i need to learn!) </sub>
 ---
 
 ### docker container 1 (dc1): reverse proxy
@@ -33,8 +33,8 @@ with pydantic and other services (like `openapi` code gen (swagger)) are big sel
 many ways to do one thing, a reason why `go` is cool too.
 
 ### docker container 3 (dc3): db
-I like `sql`.... but I also don't (sorry!!). For a personal project `noSQL` stuff is brainless, fast and preferred.
-Since it is a different container I could change it some day if I am going to scale up (but probably not. no one likes tech debt LOL)
+I like `sql`.... but for a personal project `noSQL` stuff is simple, fast and preferred.
+Since it is a different container I could change it some day if I am going to scale up.
 
 I am not sure what I will use**, but something simple like `MongoDB` for what will be only like 3 tables. Honestly the filesystem, or dicts
 might be good enough. :shrug:
