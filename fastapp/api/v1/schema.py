@@ -3,7 +3,9 @@ from typing import Optional
 
 from pydantic import BaseModel
 
+from fastapi import UploadFile
 
+# I will eventually set up a "garbage" collector. Something that cleans up over time
 class LifeSpan(str, Enum):
     short = "short"
     long = "long"
@@ -16,7 +18,7 @@ class Item(BaseModel):
 
 
 class File(Item):
-    location: Optional[str]
+    item: Optional[UploadFile]
 
 
 class Text(Item):

@@ -15,7 +15,7 @@ RUN poetry install --no-interaction --no-ansi
 
 #enable when no longer need --reload (remove mount from docker-compose)
 #COPY fastapp fastapp
-CMD [ "poetry", "run", "uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8888", "--reload" ]
+CMD [ "poetry", "run", "uvicorn", "fastapp.main:app", "--host", "0.0.0.0", "--port", "8888", "--reload" ]
 
 
 FROM --platform=linux/amd64 nginx:latest as proxy

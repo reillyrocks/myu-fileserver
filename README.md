@@ -30,14 +30,12 @@ will interact with the fastapi. I wonder if i could do a swagger page.
 
 `fastapi` app. High performance is not important for me... I genuinely like the framework. It is intuitive, very pythonic, and its integration 
 with pydantic and other services (like `openapi` code gen (swagger)) are big sells. `Flask` has become messy imo. Too
-many ways to do one thing, a reason why `go` is cool too.
+many ways to do one thing, a reason why `go` is cool to me.
 
 ### docker container 3 (dc3): db
-I like `sql`.... but for a personal project `noSQL` stuff is simple, fast and preferred.
-Since it is a different container I could change it some day if I am going to scale up.
+Honestly. I do not know if I need a db. I think a file system set up is sufficient.  
+I like `sql`.... but for this project `noSQL` would be preferred.
 
-I am not sure what I will use**, but something simple like `MongoDB` for what will be only like 3 tables. Honestly the filesystem, or dicts
-might be good enough. :shrug:
 
 # Running
 create creds files: `.htpasswd`
