@@ -3,6 +3,7 @@ from datetime import datetime
 from pydantic import BaseModel, Field, root_validator
 from typing import List, Optional
 
+from fastapp.api.v2.services.response_handler.utils import SubwayUtil
 
 class TripDescriptor(BaseModel):
     trip_id: str
@@ -18,11 +19,10 @@ class StopTimeUpdate(BaseModel):
 
     @root_validator(pre=True)
     def flatten(cls, values):
-        est_offset = -5 * 60 * 60
-        datetime.utcfromtimestamp(1705901357 + est_offset)
+        su = SubwayUtil()
         return {
-            "arrival": datetime.utcfromtimestamp(int(values.get("arrival", {}).get("time", None)) + est_offset),
-            "departure": datetime.utcfromtimestamp(int(values.get("departure", {}).get("time", None)) + est_offset),
+            "arrival": su.get_est_datetime(values.get("arrival", {}).get("time", None)),
+            "departure": su.get_est_datetime(values.get("departure", {}).get("time", None)),
             "stop_id": values.get("stop_id", 0),
         }
 

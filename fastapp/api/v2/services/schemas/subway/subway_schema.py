@@ -24,7 +24,7 @@ class SubwayTrain(BaseModel):
     current_stop_sequence: Optional[int]
     stop_id: Optional[str]
     current_status: Optional[str]
-    timestamp: Optional[int]
+    timestamp: Optional[datetime]
 
     # Alert
     informed_entity: Optional[List[str]]

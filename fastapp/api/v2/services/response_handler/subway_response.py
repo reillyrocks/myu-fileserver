@@ -1,6 +1,7 @@
 from typing import List
 
 from fastapp.api.v2.services.response_handler.nyc_api_interface import convert_nyc_response
+from fastapp.api.v2.services.response_handler.utils import SubwayUtil
 from fastapp.api.v2.services.schemas.subway.subway_response_schema import Train, Vehicle, TripUpdate, SubwayEntity
 from fastapp.api.v2.services.schemas.subway.subway_schema import SubwayTrain
 
@@ -34,7 +35,7 @@ class SubwayResponseHandler:
     def create_trains(self):
         trains = self.zip_response_trains()
         subway_trains = []
-
+        su = SubwayUtil()
         for train in trains:
             try:
                 subway_trains.append(SubwayTrain(
@@ -46,7 +47,7 @@ class SubwayResponseHandler:
                     current_stop_sequence=train.vehicle.current_stop_sequence,
                     stop_id=train.vehicle.stop_id,
                     current_status=train.vehicle.current_status,
-                    timestamp=train.vehicle.timestamp,
+                    timestamp=su.get_est_datetime(train.vehicle.timestamp),
 
                     # Need to handle None values for this
                     # informed_entity=train.alert.informed_entity,
