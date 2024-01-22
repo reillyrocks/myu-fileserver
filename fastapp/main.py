@@ -8,9 +8,10 @@ app = FastAPI(
     description=settings.description,
 )
 
-# v1
-app.include_router(file_router, tags=["v1"])
-app.include_router(text_router, tags=["v1"])
+# # v1
+# app.include_router(file_router, tags=["v1"])
+# app.include_router(text_router, tags=["v1"])
+app.include_router(text_router, tags=["v2"])
 
 
 @app.get("/")
