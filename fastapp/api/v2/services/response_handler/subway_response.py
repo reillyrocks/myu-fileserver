@@ -1,5 +1,7 @@
 from typing import List
 
+from pydantic_core import ValidationError
+
 from fastapp.api.v2.services.response_handler.nyc_api_interface import convert_nyc_response
 from fastapp.api.v2.services.response_handler.utils import SubwayUtil
 from fastapp.api.v2.services.schemas.subway.subway_response_schema import Train, Vehicle, TripUpdate, SubwayEntity
@@ -38,12 +40,13 @@ class SubwayResponseHandler:
         su = SubwayUtil()
         for train in trains:
             try:
+                print(f"train.trip_update.stop_time_update {train.trip_update.stop_time_update}")
                 subway_trains.append(SubwayTrain(
                     id=train.id,
                     route_id=train.trip_update.trip.route_id,
                     start_time=train.trip_update.trip.start_time,
                     start_date=train.trip_update.trip.start_date,
-                    stop_time_update=train.trip_update.stop_time_update,
+                    stop_time_update=dict(train.trip_update).get("stop_time_update",[]),
                     current_stop_sequence=train.vehicle.current_stop_sequence,
                     stop_id=train.vehicle.stop_id,
                     current_status=train.vehicle.current_status,
@@ -57,5 +60,6 @@ class SubwayResponseHandler:
                 raise Exception(f"AttributeError= None value when accessing values to create subway_trains {e}")
             except TypeError as e:
                 raise Exception(f"TypeError= None value for 'arrival' or 'departure' Time - failing the est adjusting {e}")
-
+            except ValidationError as e:
+                raise Exception(f"ValdiationError for train {train}. Exception {e}")
         return subway_trains

@@ -12,7 +12,7 @@ def feed_entity_to_json_dict(feed_entity: gtfs_realtime_pb2.FeedEntity) -> dict:
 
 
 def convert_nyc_response(pydantic_object: BaseModel):
-    url = "https://api-endpoint.mta.info/Dataservice/mtagtfsfeeds/nyct%2Fgtfs-ace"
+    url = "https://api-endpoint.mta.info/Dataservice/mtagtfsfeeds/nyct%2Fgtfs-nqrw"
     api_key = "oL1ryDzgab8YfJyQn4Jc46338O7AyF5P7khip8zC"
     headers = {"x-api-key": api_key}
 
@@ -23,5 +23,5 @@ def convert_nyc_response(pydantic_object: BaseModel):
 
     entity_list = []
     for entity in feed.entity:
-        entity_list.append(pydantic_object.parse_obj(feed_entity_to_json_dict(entity)))
+        entity_list.append(pydantic_object.model_validate(feed_entity_to_json_dict(entity)))
     return entity_list

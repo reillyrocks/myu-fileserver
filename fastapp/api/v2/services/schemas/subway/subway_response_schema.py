@@ -1,9 +1,10 @@
 from datetime import datetime
 
-from pydantic import BaseModel, Field, root_validator
+from pydantic import BaseModel, Field, model_validator
 from typing import List, Optional
 
 from fastapp.api.v2.services.response_handler.utils import SubwayUtil
+
 
 class TripDescriptor(BaseModel):
     trip_id: str
@@ -17,14 +18,12 @@ class StopTimeUpdate(BaseModel):
     arrival: datetime
     departure: datetime
 
-    @root_validator(pre=True)
-    def flatten(cls, values):
+    @model_validator(mode='before')
+    def set_datetime(cls, values):
         su = SubwayUtil()
-        return {
-            "arrival": su.get_est_datetime(values.get("arrival", {}).get("time", None)),
-            "departure": su.get_est_datetime(values.get("departure", {}).get("time", None)),
-            "stop_id": values.get("stop_id", 0),
-        }
+        values['arrival'] = su.get_est_datetime(values.get("arrival", {}).get("time", 0))
+        values['departure'] = su.get_est_datetime(values.get("departure", {}).get("time", 0))
+        return values
 
 
 class TripUpdate(BaseModel):

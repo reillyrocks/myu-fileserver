@@ -18,7 +18,7 @@ class SubwayTrain(BaseModel):
     start_date: Optional[str]
 
     #Trip Update
-    stop_time_update: Optional[List[StopTime]]
+    stop_time_update: List[StopTime]
 
     # Vehicle
     current_stop_sequence: Optional[int]
@@ -27,6 +27,6 @@ class SubwayTrain(BaseModel):
     timestamp: Optional[datetime]
 
     # Alert
-    informed_entity: Optional[List[str]]
-    header_text: Optional[str]
+    informed_entity: Optional[List[str]] = None
+    header_text: Optional[str] = None
 
