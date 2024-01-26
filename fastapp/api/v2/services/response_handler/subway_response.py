@@ -40,13 +40,12 @@ class SubwayResponseHandler:
         su = SubwayUtil()
         for train in trains:
             try:
-                print(f"train.trip_update.stop_time_update {train.trip_update.stop_time_update}")
                 subway_trains.append(SubwayTrain(
                     id=train.id,
                     route_id=train.trip_update.trip.route_id,
                     start_time=train.trip_update.trip.start_time,
                     start_date=train.trip_update.trip.start_date,
-                    stop_time_update=dict(train.trip_update).get("stop_time_update",[]),
+                    stop_time_update=train.trip_update.model_dump().get("stop_time_update", []),
                     current_stop_sequence=train.vehicle.current_stop_sequence,
                     stop_id=train.vehicle.stop_id,
                     current_status=train.vehicle.current_status,

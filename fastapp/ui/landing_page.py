@@ -2,7 +2,7 @@
 from fastapi import APIRouter
 from fastapi.responses import HTMLResponse
 from fastui import FastUI, AnyComponent, prebuilt_html, components as c
-from fastui.events import GoToEvent, BackEvent, PageEvent
+from fastui.events import PageEvent
 
 from fastapp.ui.demo_page import demo_page
 

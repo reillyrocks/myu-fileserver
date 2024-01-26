@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 
-from fastapp.api.v2.services.schemas.subway.subway_schema import SubwayTrain, StopTime
+from fastapp.api.v2.services.schemas.subway.subway_schema import StopTime
 from fastapp.api.v2.services.stop_finder import get_train_stop_northerblvd
 
 subway_router = APIRouter(

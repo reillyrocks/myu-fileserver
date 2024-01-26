@@ -2,9 +2,6 @@ from pathlib import Path
 
 from fastapi import UploadFile
 
-from fastapp.api.v1.schema import File
-import subprocess as sb
-
 STORAGE_PATH = "/home"
 
 # file_name: location

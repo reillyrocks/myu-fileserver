@@ -1,5 +1,5 @@
 from fastapp.api.v2.services.response_handler.subway_response import SubwayResponseHandler
-from fastapp.api.v2.services.schemas.subway.subway_schema import SubwayTrain, StopTime
+from fastapp.api.v2.services.schemas.subway.subway_schema import StopTime
 
 
 def get_train_stop_northerblvd(train_id) -> list[StopTime]:

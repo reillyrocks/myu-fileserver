@@ -1,6 +1,7 @@
 from fastapi import APIRouter, UploadFile
-from .services import texts, files
+
 from . import schema
+from .services import texts, files
 
 file_router = APIRouter(
     prefix="/files",

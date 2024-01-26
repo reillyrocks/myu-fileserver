@@ -1,9 +1,10 @@
-from typing import List
-
-from google.transit import gtfs_realtime_pb2
-from google.protobuf.json_format import MessageToDict
 import requests
+from google.protobuf.json_format import MessageToDict
+from google.protobuf.message import DecodeError
+from google.transit import gtfs_realtime_pb2
 from pydantic import BaseModel
+
+from fastapp.core.settings import get_settings
 
 
 # Function to convert a FeedEntity to a JSON-like dictionary
@@ -13,13 +14,17 @@ def feed_entity_to_json_dict(feed_entity: gtfs_realtime_pb2.FeedEntity) -> dict:
 
 def convert_nyc_response(pydantic_object: BaseModel):
     url = "https://api-endpoint.mta.info/Dataservice/mtagtfsfeeds/nyct%2Fgtfs-nqrw"
-    api_key = "oL1ryDzgab8YfJyQn4Jc46338O7AyF5P7khip8zC"
-    headers = {"x-api-key": api_key}
+    headers = {"x-api-key": get_settings().secret_key}
 
-    r = requests.get(url, headers=headers)
+    try:
+        r = requests.get(url, headers=headers)
 
-    feed = gtfs_realtime_pb2.FeedMessage()
-    feed.ParseFromString(r.content)
+        feed = gtfs_realtime_pb2.FeedMessage()
+        feed.ParseFromString(r.content)
+
+    except DecodeError:
+        raise Exception("print bad request :(")
+
 
     entity_list = []
     for entity in feed.entity:

@@ -1,13 +1,18 @@
+from functools import lru_cache
+
 from fastapi import FastAPI
 from fastapi.responses import RedirectResponse
 
 # from fastapp.config import settings
-# from .api.v1.api import file_router, text_router
 from fastapp.api.v2.api import subway_router
+from fastapp.core.settings import get_settings
 
+
+settings = get_settings()
 app = FastAPI(
-    title="MYU API",
-    description="API for interacting with anything",
+    title=settings.title,
+    description=settings.description,
+
 )
 
 # # v1

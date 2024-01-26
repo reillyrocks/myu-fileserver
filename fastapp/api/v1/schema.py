@@ -1,9 +1,9 @@
 from enum import Enum
 from typing import Optional
 
+from fastapi import UploadFile
 from pydantic import BaseModel
 
-from fastapi import UploadFile
 
 # I will eventually set up a "garbage" collector. Something that cleans up over time
 class LifeSpan(str, Enum):

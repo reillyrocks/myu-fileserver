@@ -1,7 +1,7 @@
 from datetime import datetime
-
-from pydantic import BaseModel, Field, model_validator
 from typing import List, Optional
+
+from pydantic import BaseModel, model_validator
 
 from fastapp.api.v2.services.response_handler.utils import SubwayUtil
 
