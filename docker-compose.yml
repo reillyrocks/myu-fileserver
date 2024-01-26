@@ -10,7 +10,7 @@ services:
 #      - ./frontend/nginx.conf:/etc/nginx/nginx.conf:ro
 #    networks:
 #      - frontend
-  app:
+  npm:
     image: 'jc21/nginx-proxy-manager:latest'
     restart: unless-stopped
     ports:
@@ -20,6 +20,8 @@ services:
     volumes:
       - ./data:/data
       - ./letsencrypt:/etc/letsencrypt
+    networks:
+      - npm
 
 #  proxy:
 #    image: myu/proxy:latest
@@ -55,9 +57,9 @@ services:
     volumes:
       - ./fastapp:/usr/src/api/fastapp
     networks:
-      - frontend
-      - backend
       - npm
+#      - frontend
+#      - backend
 
 #  db:
 #    image: myu/db:latest
@@ -71,12 +73,12 @@ services:
 # urls "http://myu_fastapi:8000" or "http://fastapi:8000" (The service name, or container_name. I will be using the container_name)
 networks:
   npm:
-    name: nginx_proxy_manager
+    name: nginx_proxy_manager1
     driver: bridge
-  frontend:
-    name: frontend_network
-    driver: bridge
-  backend:
-    name: backend_network
-    driver: bridge
+#  frontend:
+#    name: frontend_network
+#    driver: bridge
+#  backend:
+#    name: backend_network
+#    driver: bridge
 # bridge is a default network, I will be using it.
