@@ -10,31 +10,38 @@ services:
 #      - ./frontend/nginx.conf:/etc/nginx/nginx.conf:ro
 #    networks:
 #      - frontend
-
-  proxy:
-    image: myu/proxy:latest
-    container_name: myu_proxy
-    # I think I may need the below for when the certbot restart s nginx
-#    restart: always
-    build:
-      target: proxy
+  app:
+    image: 'jc21/nginx-proxy-manager:latest'
+    restart: unless-stopped
     ports:
-      - "80:80"
-#      - "443:443"
+      - '80:80'
+      - '81:81'
+      - '443:443'
     volumes:
-      - .htpasswd:/etc/nginx/.htpasswd:ro
-      - ./proxy/nginx.conf:/etc/nginx/nginx.conf:ro
-#      - ./certbot/www:/var/www/certbot/:ro
-#      - ./certbot/conf/:/etc/nginx/ssl/:ro
-    networks:
-      - frontend
-# manual process.... will one day do it but not today
-#  certbot:
-#    image: certbot/certbot:latest
-#    command: certbot certonly -d reillykeating.com --manual --preferred-challenges dns --dry-run --register-unsafely-without-email
+      - ./data:/data
+      - ./letsencrypt:/etc/letsencrypt
+
+#  proxy:
+#    image: myu/proxy:latest
+#    container_name: myu_proxy
+#    # I think I may need the below for when the certbot restart s nginx
+##    restart: always
+#    build:
+#      target: proxy
+#    ports:
+#      - "80:80"
+##      - "443:443"
 #    volumes:
-#      - ./certbot/www/:/var/www/certbot/:rw
-#      - ./certbot/conf/:/etc/letsencrypt/:rw
+#      - .htpasswd:/etc/nginx/.htpasswd:ro
+#      - ./proxy/nginx.conf:/etc/nginx/nginx.conf:ro
+##      - ./certbot/www:/var/www/certbot/:ro
+##      - ./certbot/conf/:/etc/nginx/ssl/:ro
+#    networks:
+#      - frontend
+#      - npm
+#
+
+
 
 
   fastapi:
@@ -50,6 +57,7 @@ services:
     networks:
       - frontend
       - backend
+      - npm
 
 #  db:
 #    image: myu/db:latest
@@ -62,6 +70,9 @@ services:
 # Create a network! Frontend network member "proxy" can get an api request from "fastapi" by pinging
 # urls "http://myu_fastapi:8000" or "http://fastapi:8000" (The service name, or container_name. I will be using the container_name)
 networks:
+  npm:
+    name: nginx_proxy_manager
+    driver: bridge
   frontend:
     name: frontend_network
     driver: bridge

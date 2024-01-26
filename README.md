@@ -40,7 +40,7 @@ I like `sql`.... but for this project `noSQL` would be preferred.
 # Running
 create creds files: `.htpasswd`
 
-`htpasswd -c .htpasswd <username>`
+`docker run --rm --entrypoint htpasswd -it xmartlabs/htpasswd -c .htpasswd <USERNAME>`
 
 `docker compose up`
 it will be running at localhost (use password from above)
