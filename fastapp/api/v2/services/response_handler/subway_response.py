@@ -11,8 +11,8 @@ from fastapp.api.v2.services.schemas.subway.subway_schema import SubwayTrain
 class SubwayResponseHandler:
 
     # Method to zip together and link trip_updates, alerts and vehicles into one object (using the same trip_id)
-    def zip_response_trains(self) -> List[Train]:
-        nyc_response_entities: List[SubwayEntity] = convert_nyc_response(SubwayEntity)
+    def zip_response_trains(self, train_lines) -> List[Train]:
+        nyc_response_entities: List[SubwayEntity] = convert_nyc_response(train_lines, SubwayEntity)
         train_id_dict = {}
         for entity in nyc_response_entities:
             if isinstance(entity.vehicle, Vehicle):
@@ -34,8 +34,8 @@ class SubwayResponseHandler:
                     train_id_dict[entity.trip_update.trip.trip_id] = train
         return list(train_id_dict.values())
 
-    def create_trains(self):
-        trains = self.zip_response_trains()
+    def create_trains(self, train_lines) -> list[SubwayTrain]:
+        trains = self.zip_response_trains(train_lines)
         subway_trains = []
         su = SubwayUtil()
         for train in trains:

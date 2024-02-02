@@ -1,4 +1,4 @@
-from fastapp.api.v1 import schema
+from fastapp.api.v1_depricated import schema
 
 texts = {"hello", "world"}
 

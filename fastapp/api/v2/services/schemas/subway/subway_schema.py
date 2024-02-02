@@ -10,6 +10,18 @@ class StopTime(BaseModel):
     departure: datetime
 
 
+class TrainStop(BaseModel):
+    id: str
+    route_id: str
+    north: Optional[StopTime]
+    south: Optional[StopTime]
+
+
+class TrainStopInfo(BaseModel):
+    stop_id: str
+    trains: Optional[List[TrainStop]]
+
+
 class SubwayTrain(BaseModel):
     id: str
     # Descriptor
