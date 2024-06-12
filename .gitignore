@@ -1,4 +1,5 @@
 .idea
+dist
 .dockerignore
 .htpasswd
 *__pycache__*
