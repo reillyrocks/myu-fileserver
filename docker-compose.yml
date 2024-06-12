@@ -25,6 +25,8 @@ services:
     container_name: myu_fastapi
     build:
       target: fastapi
+    ports:
+      - '8888:8888'
     # I run the uvicorn fastapi app with --reload... in order for that to work,
     # I mount the app so uvicorn can see the updates to code and restart the app.
     # This way the app updates with my changes, and I do not need to launch docker :)

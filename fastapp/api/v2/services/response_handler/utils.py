@@ -1,6 +1,6 @@
 from datetime import datetime
 
-SUBWAY_STOP_DOC_LOCATION = "fastapp/api/v2/services/response_handler/docs/MTA_Subway_Stations_20240121.csv"
+SUBWAY_STOP_DOC_LOCATION = "fastapp/api/v2/services/response_handler/docs/MTA_Subway_Stations.csv"
 SUBWAY_STOP_DOC = None
 
 class SubwayUtil:

@@ -19,6 +19,8 @@ class TrainStop(BaseModel):
 
 class TrainStopInfo(BaseModel):
     stop_id: str
+    station_name: str
+    direction: str
     trains: Optional[List[TrainStop]]
 
 
